@@ -26,12 +26,11 @@ var givenProvider = null;
 
 // ADD GIVEN PROVIDER
 /* jshint ignore:start */
-var global;
-try {
-  global = Function('return this')();
-} catch (e) {
-  global = window;
-}
+var global =
+    (function() {
+        return this || (typeof self === 'object' && self);
+        // eslint-disable-next-line no-new-func
+    })() || new Function('return this')();
 
 // EthereumProvider
 if(typeof global.ethereumProvider !== 'undefined') {
